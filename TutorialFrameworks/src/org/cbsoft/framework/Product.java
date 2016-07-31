@@ -1,5 +1,7 @@
 package org.cbsoft.framework;
 
+import org.aula.application.Uppercase;
+
 public class Product{
 	
 	private String name;
@@ -17,12 +19,16 @@ public class Product{
 	public String getBrand() {
 		return brand;
 	}
+	@Prefix("NR#")
 	public String getCode() {
 		return code;
 	}
+	
+	@Uppercase
 	public String getName() {
 		return name;
 	}
+	@Prefix("R$")
 	public double getPrice() {
 		return price;
 	}
