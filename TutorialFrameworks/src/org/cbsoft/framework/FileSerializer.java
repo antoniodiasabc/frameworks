@@ -6,10 +6,20 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FileSerializer {
+public class FileSerializer implements Serializer {
 
 	DataFormatter df;
 	PostProcessor pp;
+
+	@Override
+	public PostProcessor getPostProcessor() {
+		return pp;
+	}
+
+	@Override
+	public void setPostProcessor(PostProcessor pp) {
+		this.pp = pp;
+	}
 
 	public FileSerializer(PostProcessor pp, DataFormatter df) {
 		super();
@@ -17,6 +27,10 @@ public class FileSerializer {
 		this.pp = pp;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.cbsoft.framework.Serializer#generateFile(java.lang.String, java.lang.Object)
+	 */
+	@Override
 	public void generateFile(String filename, Object obj) {
 		byte[] bytes = df.formatData(getPropertiesList(obj));
 
@@ -30,6 +44,10 @@ public class FileSerializer {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.cbsoft.framework.Serializer#getPropertiesList(java.lang.Object)
+	 */
+	
 	public Map<String, Object> getPropertiesList(Object obj) {
 		Map<String, Object> props = new HashMap<String, Object>();
 		Class<?> clazz = obj.getClass();
